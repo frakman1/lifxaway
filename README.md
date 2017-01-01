@@ -1,2 +1,2 @@
 # lifxaway
-Change my LIFX lights based on pingability of my phone
+Change the colour of my LIFX bulbs based on the pingability of my phone
