@@ -13,18 +13,23 @@ def createBulb(ip, macString, port = 56700):
     return lazylights.Bulb(b'LIFXV2', binascii.unhexlify(macString.replace(':', '')), (ip,port))
 #------------------------------------------------------------------------------------------------------------
 def ping(host):
-    """
-    Returns True if host responds to a ping request
-    """
-    import subprocess, platform
+    ipaddress = myPhone
+    proc = subprocess.Popen(
+        ['ping', '-n', '4', ipaddress],
+        stdout=subprocess.PIPE)
+    stdout, stderr = proc.communicate()
 
-    # Ping parameters as function of OS
-    ping_str = "-n 1" if  platform.system().lower()=="windows" else "-c 1"
-    args = "ping " + " " + ping_str + " " + host
-    need_sh = False if  platform.system().lower()=="windows" else True
-
-    # Ping
-    return subprocess.call(args, shell=need_sh) == 0
+    #print proc.returncode 
+    print('ping output:')
+    result = stdout.decode('ASCII')
+    print result
+    good_result = "Reply from "+myPhone
+    if good_result in result:
+        print "Phone is Pingable"
+        return True
+    else:
+        print "Phone is Not Pingable"
+        return False
 #------------------------------------------------------------------------------------------------------------
 
 myBulb1 = createBulb('10.0.0.X','XX:XX:XX:XX:XX:XX')  #Bulb for right side of screen
