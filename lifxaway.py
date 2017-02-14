@@ -7,6 +7,9 @@ import math
 import binascii
 from colour import Color
 
+#Change this to match your IP address
+myPhone = "10.0.0.11"
+
 #------------------------------------------------------------------------------------------------------------
 # I use this to manually create a bulb using IP and MAC address.
 def createBulb(ip, macString, port = 56700):
@@ -33,7 +36,7 @@ def ping(host):
 #------------------------------------------------------------------------------------------------------------
 
 myBulb1 = createBulb('10.0.0.X','XX:XX:XX:XX:XX:XX')  #Bulb for right side of screen
-myPhone = "10.0.0.11"
+
 #lazylights requires a 'set' of bulbs as input so I put each one in its own set
 bulbs1=[myBulb1]
 
@@ -41,7 +44,7 @@ bulbs1=[myBulb1]
 while True:
     
     # test call
-    status = (ping("10.0.0.11"))
+    status = (ping(myPhone))
 
     if status==True:
         print "***True"
